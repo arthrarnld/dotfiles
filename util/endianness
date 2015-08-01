@@ -1,0 +1,9 @@
+#!/bin/bash
+
+res=`echo -n I | hexdump -e '"%06o"'`
+
+if [ $res = "000111" ]; then
+	echo "little"
+else
+	echo "big"
+fi
