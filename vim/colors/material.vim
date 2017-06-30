@@ -15,7 +15,7 @@ endif
 
 set t_Co=256
 let g:colors_name = "material"
-
+" 237
 hi Normal         guifg=#cdd3de guibg=#263238 guisp=#263238 gui=NONE ctermfg=146 ctermbg=237 cterm=NONE
 hi IncSearch      guifg=#192224 guibg=#BD9800 guisp=#BD9800 gui=NONE ctermfg=235 ctermbg=1 cterm=NONE
 hi WildMenu       guifg=NONE guibg=#A1A6A8 guisp=#A1A6A8 gui=NONE ctermfg=NONE ctermbg=248 cterm=NONE
@@ -37,7 +37,7 @@ hi Identifier     guifg=#fad532 guibg=NONE guisp=NONE gui=NONE ctermfg=221 cterm
 hi SpecialChar    guifg=#BD9800 guibg=NONE guisp=NONE gui=NONE ctermfg=1 ctermbg=NONE cterm=NONE
 hi Conditional    guifg=#BD9800 guibg=NONE guisp=NONE gui=bold ctermfg=1 ctermbg=NONE cterm=bold
 hi StorageClass   guifg=#536991 guibg=NONE guisp=NONE gui=bold ctermfg=60 ctermbg=NONE cterm=bold
-hi Todo           guifg=#F9F9FF guibg=#BD9800 guisp=#BD9800 gui=NONE ctermfg=189 ctermbg=1 cterm=NONE
+hi Todo           guifg=#F9F9FF guibg=#BD9800 guisp=#BD9800 gui=NONE ctermfg=189 ctermbg=28 cterm=bold
 hi Special        guifg=#BD9800 guibg=NONE guisp=NONE gui=NONE ctermfg=1 ctermbg=NONE cterm=NONE
 hi LineNr         guifg=#36474e guibg=NONE guisp=NONE gui=NONE ctermfg=grey ctermbg=NONE cterm=NONE
 hi StatusLine     guifg=#192224 guibg=#BD9800 guisp=#BD9800 gui=bold ctermfg=235 ctermbg=1 cterm=bold

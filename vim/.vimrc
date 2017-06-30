@@ -11,9 +11,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'valloric/youcompleteme'
 Plugin 'Yggdroot/indentLine'
 Plugin 'fidian/hexmode'
+Plugin 'valloric/youcompleteme'
 
 call vundle#end()
 filetype plugin indent on
@@ -32,6 +32,8 @@ set exrc
 set secure
 
 set backspace=indent,eol,start
+
+set conceallevel=0
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,6 +92,8 @@ set encoding=utf8
 " Set line number column background
 hi LineNr ctermfg=245 ctermbg=NONE
 
+set cursorline
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Text, Tabs and Indent
@@ -115,23 +119,38 @@ set expandtab
 
 set laststatus=2
 
-set statusline=\ %f%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ %l,%c
+"set statusline=\ %f%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ %l,%c
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Key mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" Open .vimrc
 nnoremap <leader>av :tabnew $MYVIMRC<CR>
+" Source .vimrc
 nnoremap <leader>rv :source $MYVIMRC<CR>
 
-nnoremap <C-c> :bn<bar>bd #<CR>
+function! CloseBuffer()
+  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    ene
+  else
+    bn
+  endif
+  bd #
+endfunction
 
+" Close current buffer
+nnoremap <C-c> :call CloseBuffer()<CR>
+command! W :w | :call CloseBuffer()
+
+" Inserting blank lines
 nnoremap <C-k> O<Esc>j
 nnoremap <C-j> o<Esc>k
 inoremap <C-k> <Esc>O
 inoremap <C-j> <Esc>o
 
+" Hide highlighting
 nnoremap m :nohl<CR>
 
 " Tabs
@@ -147,6 +166,16 @@ nnoremap <leader>wk :wincmd k<CR>
 nnoremap <leader>wh :wincmd h<CR>
 nnoremap <leader>wl :wincmd l<CR>
 
+" Format JSON
+nnoremap <leader>fj :%!python -m json.tool<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" C++ snippets
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+inoremap <leader>csr const std::string&<Space>
+inoremap <leader>s std::string<Space>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -173,4 +202,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " YCM
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-let ycm_confirm_extra_conf=0
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+nnoremap <leader>yr :YcmRestartServer<CR>
+nnoremap <leader>yd :YcmDebugInfo<CR>
+nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
+nnoremap <leader>yg :YcmCompleter GoTo<CR>
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_server_log_level = 'debug'
