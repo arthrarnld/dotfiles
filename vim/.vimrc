@@ -8,19 +8,20 @@ call vundle#begin()
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 Plugin 'fidian/hexmode'
 Plugin 'valloric/youcompleteme'
+"Plugin 'Rip-Rip/clang_complete'
 
 call vundle#end()
 filetype plugin indent on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"
+" General
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Automatically reload a file
 " when it changes
@@ -35,9 +36,13 @@ set backspace=indent,eol,start
 
 set conceallevel=0
 
+autocmd FileType * set formatoptions-=ro
+
+set breakindent
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" VIM user interface
+" User interface
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " Display line numbers
@@ -92,7 +97,7 @@ set encoding=utf8
 " Set line number column background
 hi LineNr ctermfg=245 ctermbg=NONE
 
-set cursorline
+"set cursorline
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -186,6 +191,7 @@ inoremap <leader>s std::string<Space>
 map <C-n> :NERDTreeToggle<CR>
 " Always show hidden files
 let NERDTreeShowHidden=1
+let NERDTreeHighlightCursorline=0
 " Auto open
 autocmd VimEnter * NERDTree | wincmd p
 " Auto open when no file is specified
@@ -208,5 +214,3 @@ nnoremap <leader>yr :YcmRestartServer<CR>
 nnoremap <leader>yd :YcmDebugInfo<CR>
 nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>yg :YcmCompleter GoTo<CR>
-"let g:ycm_server_keep_logfiles = 1
-"let g:ycm_server_log_level = 'debug'
