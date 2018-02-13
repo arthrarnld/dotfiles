@@ -8,13 +8,12 @@ call vundle#begin()
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 Plugin 'fidian/hexmode'
-Plugin 'valloric/youcompleteme'
-"Plugin 'Rip-Rip/clang_complete'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -40,6 +39,9 @@ autocmd FileType * set formatoptions-=ro
 
 set breakindent
 
+set noesckeys
+
+let mapleader = "\\"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " User interface
@@ -65,9 +67,6 @@ set ruler
 " Height of the command bar
 set cmdheight=2
 
-" Ignore case when searching
-set ignorecase
-
 " Use smartcase for searching
 set smartcase
 
@@ -89,7 +88,6 @@ set mat=1
 syntax enable
 
 set background=dark
-colorscheme material
 
 " Always use UTF8 encoding
 set encoding=utf8
@@ -108,14 +106,10 @@ hi LineNr ctermfg=245 ctermbg=NONE
 set smarttab
 
 set autoindent
-set smartindent
 set wrap
-set cinoptions+=g0
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
+set tabstop=8
+set shiftwidth=8
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,9 +165,9 @@ nnoremap <leader>wk :wincmd k<CR>
 nnoremap <leader>wh :wincmd h<CR>
 nnoremap <leader>wl :wincmd l<CR>
 
-" Format JSON
-nnoremap <leader>fj :%!python -m json.tool<CR>
-
+" Clang Format
+nnoremap <leader>f :ClangFormat<CR>
+autocmd VimEnter * ClangFormatAutoEnable
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " C++ snippets
@@ -202,15 +196,3 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exec 'cd '.argv(0) | NERDTree | wincmd p | ene | wincmd p | endif
 " Auto-close vim if NERDTree is the last tab
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" YCM
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-nnoremap <leader>yr :YcmRestartServer<CR>
-nnoremap <leader>yd :YcmDebugInfo<CR>
-nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>yg :YcmCompleter GoTo<CR>
